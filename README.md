@@ -1,6 +1,7 @@
 # Scheduler
 
-Modifying table view cells. Insert. Delete. Move.
+Using FileManager and documents directory to save user created data. 
+
 
 #### Screenshot of Main UI
 ![scheduler app](Assets/scheduler-app.png)
