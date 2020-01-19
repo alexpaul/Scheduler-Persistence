@@ -43,7 +43,7 @@ class ScheduleListController: UIViewController {
   
   private func loadEvents() {
     do {
-      events = try PersistenceHelper.loadEvents().sorted { $0.date < $1.date }
+      events = try PersistenceHelper.loadEvents()
     } catch {
       print("error loading events: \(error)")
     }
@@ -68,17 +68,16 @@ class ScheduleListController: UIViewController {
     
     // persist (save) event to documents directory
     do {
-      try PersistenceHelper.create(event: createdEvent)
+      try PersistenceHelper.create(event: createdEvent) // adds event at the of array
     } catch {
       print("error saving event with error: \(error)")
     }
     
     // insert new event into our events array
-    // 1. update the data model e.g update the events array
-    events.insert(createdEvent, at: 0) // top of the events array
+    events.append(createdEvent)
     
     // create an indexPath to be inserted into the table view
-    let indexPath = IndexPath(row: 0, section: 0) // will represent top of table view
+    let indexPath = IndexPath(row: events.count - 1, section: 0) // will represent top of table view
     
     // 2. we need to update the table view
     // use indexPath to insert into table view
